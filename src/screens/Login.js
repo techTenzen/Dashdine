@@ -1,5 +1,22 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  TextField,
+  Paper,
+  CircularProgress,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -7,102 +24,113 @@ export default function Login() {
     password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Import the useNavigate hook from react-router-dom
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+    setError(null);
+
     try {
-      const response = await fetch("http://localhost:3000/api/loginuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: credentials.email,
-          password: credentials.password,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const json = await response.json();
-      console.log(json);
+      // API call
+      const response = await loginAPI(credentials);
 
-      if ("success" in json && json.success) {
-        localStorage.setItem("userEmail", credentials.email);
-
-        // Save the authentication token to localStorage
-        localStorage.setItem("authToken", json.authToken);
-
-        // Log the token to the console
-        console.log(localStorage.getItem("authToken"));
-
-        // Use the navigate function to navigate to a different route (e.g., home)
-        navigate("/");
+      // Handle response
+      if (response.success) {
+        setLoading(false);
+        navigate("/dashboard");
       } else {
-        // Check for a custom error message
-        if ("error" in json) {
-          setErrorMessage(json.error);
-        } else {
-          setErrorMessage("Invalid credentials. Please try again.");
-        }
+        setLoading(false);
+        setError(response.message);
       }
     } catch (error) {
-      console.error("Fetch error:", error);
+      setLoading(false);
+      setError("Failed to login");
     }
   };
 
-  const onChange = (event) => {
-    setCredentials({
-      ...credentials,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   return (
-    <div>
-      <div>
-        <div className="container">
-          <form onSubmit={handleSubmit}>
-            {errorMessage && (
-              <div className="alert alert-danger">{errorMessage}</div>
-            )}
-            <div className="form-group mb-3">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter Email"
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <Paper elevation={3}>
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              p: 2,
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+
+            {error && <Alert severity="error">{error}</Alert>}
+
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="Email Address"
                 name="email"
                 value={credentials.email}
-                onChange={onChange}
+                onChange={(e) =>
+                  setCredentials({ ...credentials, email: e.target.value })
+                }
+                autoFocus
               />
-            </div>
 
-            <div className="form-group mb-3">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 name="password"
+                label="Password"
                 type="password"
-                className="form-control"
-                placeholder="Enter Password"
                 value={credentials.password}
-                onChange={onChange}
+                onChange={(e) =>
+                  setCredentials({ ...credentials, password: e.target.value })
+                }
               />
-            </div>
 
-            <button type="submit" className="btn btn-success">
-              Submit
-            </button>
-            <Link to="/createuser" className="btn btn-danger m-3">
-              I am a New user
-            </Link>
-          </form>
-        </div>
-      </div>
-    </div>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={loading}
+              >
+                {loading ? <CircularProgress size={24} /> : "Sign In"}
+              </Button>
+
+              <Grid container>
+                <Grid item>
+                  <Link to="/register">Don't have an account? Sign Up</Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Paper>
+      </Container>
+    </ThemeProvider>
   );
 }

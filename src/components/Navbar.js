@@ -73,17 +73,23 @@ export default function Navbar() {
                 ""
               )}
             </ul>
-            <ul>
-              <Link className="nav-link fs-5 mx-3" to="/contact">
+            <form className="d-flex">
+              <Link
+                className="btn bg-white text-success mx-1 mt-0  active"
+                to="/contact"
+              >
                 Contact Us
               </Link>
-            </ul>
+            </form>
             {!localStorage.getItem("authToken") ? (
               <form className="d-flex">
                 <Link className="btn bg-white text-success mx-1" to="/login">
                   Login
                 </Link>
-                <Link className="btn bg-white text-success mx-1" to="/signup">
+                <Link
+                  className="btn bg-white text-success mx-1"
+                  to="/createuser"
+                >
                   Signup
                 </Link>
               </form>

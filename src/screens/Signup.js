@@ -37,7 +37,7 @@ export default function Signup() {
   const fetchLocationFromCoordinates = async (latitude, longitude) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/getlocation",
+        "http://localhost:3001/api/getlocation",
         {
           method: "POST",
           headers: {
@@ -65,7 +65,7 @@ export default function Signup() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/createuser",
+        "http://localhost:3001/api/createuser",
         {
           method: "POST",
           headers: {

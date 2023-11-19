@@ -11,7 +11,7 @@ export default function MyOrder() {
       if (userEmail) {
         try {
           const response = await fetch(
-            "http://localhost:3000/api/myOrderData",
+            "http://localhost:3001/api/myOrderData",
             {
               method: "POST",
               headers: {
@@ -39,7 +39,6 @@ export default function MyOrder() {
 
     fetchMyOrder();
   }, []);
-
 
   return (
     <>
@@ -82,7 +81,9 @@ export default function MyOrder() {
                 </div>
               ))
           ) : (
-            <h2><br></br>No orders found.</h2>
+            <h2>
+              <br></br>No orders found.
+            </h2>
           )}
         </div>
       </div>
