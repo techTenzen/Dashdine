@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/index.js",
+    "start": "nodemon backend/index.js",
     "build" : "npm install"
   },
   "author": "rajesh",

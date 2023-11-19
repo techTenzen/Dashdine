@@ -1,19 +1,15 @@
-import "./App.css";
-import Home from "./screens/Home";
+import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Login from "./screens/Login";
-import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-/* eslint-disable */
-import "bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
-
+import { CartProvider } from "./components/ContextReducer";
+import Home from "./screens/Home";
+import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Cart from "./screens/Cart";
-import { CartProvider } from "./components/ContextReducer";
 import MyOrder from "./screens/MyOrder";
-import Contact from "./screens/Contact.js";
+import Contact from "./screens/Contact";
+import config from "./config";
 
 function App() {
   return (
@@ -21,10 +17,26 @@ function App() {
       <BrowserRouter>
         <div>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/createuser" element={<Signup />} />
-            <Route exact path="/contact" element={<Contact />} />
+            <Route
+              exact
+              path="/"
+              element={<Home backendUrl={config.backendUrl} />}
+            />
+            <Route
+              exact
+              path="/login"
+              element={<Login backendUrl={config.backendUrl} />}
+            />
+            <Route
+              exact
+              path="/createuser"
+              element={<Signup backendUrl={config.backendUrl} />}
+            />
+            <Route
+              exact
+              path="/contact"
+              element={<Contact backendUrl={config.backendUrl} />}
+            />
           </Routes>
           <ToastContainer />
         </div>
