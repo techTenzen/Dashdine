@@ -4,7 +4,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./screens/Login";
 import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /* eslint-disable */
 import "bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
 
@@ -23,9 +24,9 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/createuser" element={<Signup />} />
-            <Route exact path="/myOrder" element={<MyOrder />} />
             <Route exact path="/contact" element={<Contact />} />
           </Routes>
+          <ToastContainer />
         </div>
       </BrowserRouter>
     </CartProvider>

@@ -1,22 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Box,
-  Typography,
-  Container,
-  TextField,
-  Paper,
-  CircularProgress,
-} from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme();
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -24,113 +10,136 @@ export default function Login() {
     password: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+  const [name, setName] = useState(""); // New state for name
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setLoading(true);
-    setError(null);
-
     try {
-      // API call
-      const response = await loginAPI(credentials);
+      const response = await fetch("http://localhost:3001/api/loginuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
 
-      // Handle response
-      if (response.success) {
-        setLoading(false);
-        navigate("/dashboard");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const json = await response.json();
+
+      if ("success" in json && json.success) {
+        localStorage.setItem("userEmail", credentials.email);
+        localStorage.setItem("authToken", json.authToken);
+        console.log(localStorage.getItem("authToken"));
+        navigate("/");
+
+        // Show toast notification with the name
+        toast.success(`Welcome, ${name}!`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
       } else {
-        setLoading(false);
-        setError(response.message);
+        if ("error" in json) {
+          setErrorMessage(json.error);
+        } else {
+          setErrorMessage("Invalid credentials. Please try again.");
+        }
       }
     } catch (error) {
-      setLoading(false);
-      setError("Failed to login");
+      console.error("Fetch error:", error);
     }
   };
 
+  const onChange = (event) => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <Paper elevation={3}>
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              p: 2,
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+    <div
+      style={{
+        backgroundImage:
+          'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
+      <div>
+        <Navbar />
+      </div>
 
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-
-            {error && <Alert severity="error">{error}</Alert>}
-
-            <Box
-              component="form"
+      <div className="container">
+        <div className="row justify-content-center mt-5">
+          <div className="col-md-6">
+            <form
+              className="border bg-dark border-success rounded p-4"
               onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="Email Address"
-                name="email"
-                value={credentials.email}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, email: e.target.value })
-                }
-                autoFocus
-              />
+              {errorMessage && (
+                <div className="alert alert-danger">{errorMessage}</div>
+              )}
+              {/* New name input */}
+              <div className="mb-3">
+                <label htmlFor="exampleInputName" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Name"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                value={credentials.password}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, password: e.target.value })
-                }
-              />
+              <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Enter Email"
+                  name="email"
+                  value={credentials.email}
+                  onChange={onChange}
+                />
+              </div>
 
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+              <div className="mb-3">
+                <label htmlFor="exampleInputPassword1" className="form-label">
+                  Password
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  placeholder="Enter Password"
+                  value={credentials.password}
+                  onChange={onChange}
+                />
+              </div>
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} /> : "Sign In"}
-              </Button>
-
-              <Grid container>
-                <Grid item>
-                  <Link to="/register">Don't have an account? Sign Up</Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
+              <Link to="/createuser" className="btn btn-danger ms-2">
+                I am a New user
+              </Link>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

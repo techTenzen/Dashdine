@@ -8,8 +8,14 @@ router.post("/orderData", async (req, res) => {
     const order_date = new Date(); // Get the current date and time
     const user = req.body.email; // Provide the user information
 
+    // Calculate total price
+    const totalPrice = data.reduce((total, food) => total + food.price, 0);
+
     // Insert the order date into the data
     data.unshift({ Order_date: order_date });
+
+    // Add a separate entry for the total price
+    data.push({ totalPrice });
 
     let order = await Order.findOne({ user: user });
 

@@ -1,93 +1,82 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
-export default function MyOrder() {
-  const [orderData, setOrderData] = useState({}); // Define the orderData state
+export default function MyOrders() {
+
+  const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMyOrder = async () => {
-      const userEmail = localStorage.getItem("userEmail");
-      if (userEmail) {
-        try {
-          const response = await fetch(
-            "http://localhost:3001/api/myOrderData",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: userEmail,
-              }),
-            }
-          );
-
-          if (response.status === 200) {
-            const data = await response.json();
-            console.log("Data received from the API:", data); // Add this line for debugging
-
-            if (data && data.orderData) {
-              setOrderData(data.orderData);
-            }
-          }
-        } catch (error) {
-          console.error("Error fetching order data:", error);
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch('/api/orders');
+        
+        if(!response.ok) {
+          throw new Error('Failed to fetch orders'); 
         }
+
+        const data = await response.json();
+        setOrders(data);
+
+      } catch(error) {
+        setError(error.message);
       }
     };
 
-    fetchMyOrder();
+    fetchOrders();
+
   }, []);
+ const formatDate = (date) => {
+    return moment(date).format('MMMM D, YYYY');
+  };
+  // Date formatting function
+
+  if(error) {
+    return <p>{error}</p>;
+  }
 
   return (
-    <>
-      <div>
-        <Navbar />
-      </div>
-      <div className="container">
-        <div className="row">
-          {orderData && orderData.order_data ? (
-            orderData.order_data
-              .slice(0)
-              .reverse()
-              .map((item, index) => (
-                <div key={index} className="col-12 col-md-6 col-lg-3">
-                  <div
-                    className="card mt-3"
-                    style={{ width: "16rem", maxHeight: "360px" }}
-                  >
-                    <img
-                      src={item.img}
-                      className="card-img-top"
-                      alt="..."
-                      style={{ height: "120px", objectFit: "fill" }}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <div
-                        className="container w-100 p-0"
-                        style={{ height: "38px" }}
-                      >
-                        <span className="m-1">{item.qty}</span>
-                        <span className="m-1">{item.size}</span>
-                        <span className="m-1">{item.Order_date}</span>
-                        <div className="d-inline ms-2 h-100 w-20 fs-5">
-                          ₹{item.price}/-
-                        </div>
-                      </div>
-                    </div>
+    <div className="container">
+      
+      <h2>Order History</h2>
+
+      {orders.length ? (
+        orders.map(order => {
+          return (
+            <div className="card">
+              
+              {/* Date */}
+              {order.order_data && (
+                <p>{formatDate(order.order_data[0][0].Order_date)}</p>
+              )}
+              
+              {/* Items */}
+              {order.order_data && order.order_data.slice(1,-1).map(items => (
+                items.map(item => (
+                  <div>
+                    <h5>{item.name}</h5>
+                    <p>₹{item.price}</p> 
                   </div>
-                </div>
-              ))
-          ) : (
-            <h2>
-              <br></br>No orders found.
-            </h2>
-          )}
-        </div>
-      </div>
-      <Footer />
-    </>
+                ))
+              ))}
+              
+              {/* Total */}
+              {order.order_data && order.order_data.length > 1 && ( 
+                <p>
+                  Total: ₹{order.order_data[order.order_data.length-1][0].totalPrice}
+                </p>
+              )}
+
+            </div>
+          );
+        })
+      ) : (
+        <p>No orders found.</p>  
+      )}
+
+    </div>
   );
+
 }
+  
+

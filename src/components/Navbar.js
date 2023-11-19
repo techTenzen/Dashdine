@@ -1,11 +1,10 @@
-// Navbar.js
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Modal from "../Modal";
 import Cart from "../screens/Cart";
-import { useCart, /*useDispatchCart*/ } from "../components/ContextReducer";
+import { useCart /*useDispatchCart*/ } from "../components/ContextReducer";
 
 export default function Navbar() {
   const [cartView, setCartView] = useState(false);
@@ -20,7 +19,7 @@ export default function Navbar() {
   const loadCart = () => {
     setCartView(true);
   };
-  
+
   return (
     <div>
       <nav
@@ -59,19 +58,6 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              {localStorage.getItem("authToken") ? (
-                <li className="nav-item">
-                  <Link
-                    className="nav-link fs-5 mx-3 active"
-                    aria-current="page"
-                    to="/myOrder"
-                  >
-                    My Orders
-                  </Link>
-                </li>
-              ) : (
-                ""
-              )}
             </ul>
             <form className="d-flex">
               <Link

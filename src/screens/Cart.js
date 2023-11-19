@@ -1,4 +1,3 @@
-// Cart.js
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useCart, useDispatchCart } from "../components/ContextReducer";
