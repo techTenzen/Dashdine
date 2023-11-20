@@ -5,7 +5,7 @@ const mongoDB = require("./db");
 mongoDB();
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("DB CONNECTED PEOPLE");
 });
 
 app.use((req, res, next) => {
