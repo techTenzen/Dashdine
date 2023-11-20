@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3001; // Update the port to 3000
+const port = 3001; 
 const mongoDB = require("./db");
 mongoDB();
 
@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 });
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Update the origin
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); 
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";
 
+const containerStyle = {
+  paddingLeft: 0, 
+  paddingRight: 0, 
+  marginLeft: 0,
+  marginRight: 0, 
+};
 const cardStyle = {
-  width: "22rem",
+  maxWidth: "22rem",
   maxHeight: "520px",
 };
 
@@ -36,7 +42,7 @@ export default function Card({ foodItems }) {
   const dispatchCart = useDispatchCart();
   const cart = useCart();
 
- /*const handleAddToCart = async () => {
+  /*const handleAddToCart = async () => {
    let itemToAdd = [];
 
    for (const item of foodItems) {
@@ -52,36 +58,36 @@ export default function Card({ foodItems }) {
      }
    }
 */
-const handleAddToCart = async () => {
-  let itemToAdd = [];
+  const handleAddToCart = async () => {
+    let itemToAdd = [];
 
-  for (const item of foodItems) {
-    if (item.id === foodItems[0].id) {
-      // Compare with the appropriate ID property
-      itemToAdd = {
-        name: item.name,
-        price: getTotalPrice(item),
-        qty: item.qty, // Replace with the appropriate property for quantity
-        options: item.options, // Replace with the appropriate property for options
-      };
+    for (const item of foodItems) {
+      if (item.id === foodItems[0].id) {
+        // Compare with the appropriate ID property
+        itemToAdd = {
+          name: item.name,
+          price: getTotalPrice(item),
+          qty: item.qty, // Replace with the appropriate property for quantity
+          options: item.options, // Replace with the appropriate property for options
+        };
 
-      break;
+        break;
+      }
     }
-  }
 
-  dispatchCart({
-    type: "ADD_TO_CART",
-    payload: itemToAdd,
-  });
+    dispatchCart({
+      type: "ADD_TO_CART",
+      payload: itemToAdd,
+    });
 
-  // Log the cart state to check if the item was added
-  console.log("Cart state after adding item:", cart);
-};
+    // Log the cart state to check if the item was added
+    console.log("Cart state after adding item:", cart);
+  };
 
   return (
     <div>
       {foodItems.map((dish, index) => (
-        <div className="card mt-3" style={cardStyle} key={index}>
+        <div className="card mt-3" style={ containerStyle} key={index}>
           <img
             src={dish.img}
             className="card-img-top"
@@ -96,7 +102,7 @@ const handleAddToCart = async () => {
           <div className="card-body">
             <h5 className="card-title fs-4 mb-3">{dish.name}</h5>
             <div className="container w-100">
-              <div className="d-flex align-items-center mb-3">
+              <div className="d-flex align-items ">
                 <select
                   className="h-100 bg-dark"
                   value={selectedOption}
@@ -128,7 +134,7 @@ const handleAddToCart = async () => {
             </div>
             <hr />
             <button
-              className="btn btn-dark justify-center ms-2"
+              className="btn btn-dark  ms-2"
               onClick={handleAddToCart}
             >
               Add To Cart

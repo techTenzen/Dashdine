@@ -5,10 +5,8 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/User");
 
-// Replace this with your actual secret key
 const jwtSecret = "onepieceonepieceonepieceonepieceonepieceonepieceonepieceonepiece";
 
-// Validation middleware for creating a user
 const createUserValidation = [
   body("email").isEmail().withMessage("Invalid email address"),
   body("name")

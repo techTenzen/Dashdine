@@ -3,7 +3,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ContactUsPage = () => {
-  // Styling
   const pageStyle = {
     maxWidth: "600px",
     margin: "0 auto",
@@ -136,9 +135,7 @@ const ContactUsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
 
-    // Display a toast message
     toast.success("We will reach out to you soon!", {
       position: "top-center",
       autoClose: 3000,
@@ -148,7 +145,6 @@ const ContactUsPage = () => {
       draggable: true,
     });
 
-    // Optionally, you can reset the form data after submission
     setFormData({
       name: "",
       email: "",
@@ -157,7 +153,6 @@ const ContactUsPage = () => {
     });
   };
 
-  // Toggle FAQ answer visibility
   const toggleAnswer = (index) => {
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
   };

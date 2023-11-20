@@ -29,7 +29,6 @@ export default function MyOrders() {
  const formatDate = (date) => {
     return moment(date).format('MMMM D, YYYY');
   };
-  // Date formatting function
 
   if(error) {
     return <p>{error}</p>;

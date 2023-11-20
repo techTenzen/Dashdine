@@ -40,7 +40,6 @@ export default function Login() {
         console.log(localStorage.getItem("authToken"));
         navigate("/");
 
-        // Show toast notification with the name
         toast.success(`Welcome, ${name}!`, {
           position: "top-right",
           autoClose: 3000,
@@ -67,9 +66,7 @@ export default function Login() {
   return (
     <div
       style={{
-        backgroundImage:
-          'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
-        backgroundSize: "cover",
+        background: "linear-gradient(45deg, #333, #000)",
         height: "100vh",
       }}
     >
@@ -83,6 +80,7 @@ export default function Login() {
             <form
               className="border bg-dark border-success rounded p-4"
               onSubmit={handleSubmit}
+              style={{ color: "#FFF" }}
             >
               {errorMessage && (
                 <div className="alert alert-danger">{errorMessage}</div>
@@ -130,10 +128,18 @@ export default function Login() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                style={{ background: "#4CAF50" }}
+              >
                 Submit
               </button>
-              <Link to="/createuser" className="btn btn-danger ms-2">
+              <Link
+                to="/createuser"
+                className="btn btn-danger ms-2"
+                style={{ background: "#FF5050" }}
+              >
                 I am a New user
               </Link>
             </form>

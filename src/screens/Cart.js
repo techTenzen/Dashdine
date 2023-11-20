@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useCart, useDispatchCart } from "../components/ContextReducer";
 import { toast } from "react-toastify";
-import "./Cart.css"; // Add your CSS file for styling (if needed)
+import "./Cart.css"; 
 
 export default function Cart() {
   const [name, setName] = useState("");
-  const [selectedRating, setSelectedRating] = useState(0); // State for selected food rating
-  const [serviceRating, setServiceRating] = useState(0); // State for selected service rating
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [serviceRating, setServiceRating] = useState(0);
+  const [address, setAddress] = useState(""); 
   const data = useCart();
   const dispatch = useDispatchCart();
 
   const handleCheckOut = async () => {
-    if (!name) {
-      alert("Please enter your name before checking out.");
+    if (!name || !address) {
+      alert("Please enter your name and address before checking out.");
       return;
     }
 
@@ -27,16 +28,15 @@ export default function Cart() {
         order_data: data,
         email: userEmail,
         serviceRating: serviceRating,
+        address: address,
       }),
     });
 
     if (response.status === 200) {
       dispatch({ type: "CLEAR_CART" });
 
-      // Show the Thank You toast
       showCheckoutSuccessToast();
 
-      // Show the Feedback toast with selected food and service ratings
       showFeedbackToast(selectedRating, serviceRating);
 
       setTimeout(() => {
@@ -74,6 +74,10 @@ export default function Cart() {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
   const handleStarClick = (rating, isServiceRating) => {
@@ -118,7 +122,7 @@ export default function Cart() {
         ) : (
           <div>
             <table className="table table-hover">
-              <thead className="text-success fs-4">
+              <thead className="text-success fs-5">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -147,11 +151,13 @@ export default function Cart() {
             </table>
 
             <div className="mt-3">
-              <h1 className="fs-2">Total Price: {totalPrice || 0}/-</h1>
+              <h1 className="fs-4">Total Price: {totalPrice || 0}/-</h1>
             </div>
 
             <div className="mt-5">
-              <label htmlFor="signature">Signature:</label>
+              <label htmlFor="signature" className="label signature-label fs-5">
+                Signature:
+              </label>
               <div className="input-group">
                 <input
                   type="text"
@@ -166,17 +172,37 @@ export default function Cart() {
             </div>
 
             <div className="mt-3">
-              <label htmlFor="serviceRating">Rate Our Service:</label>
+              <label htmlFor="address" className="label address-label fs-5">
+                Delivery Address:
+              </label>
+              <div className="input-group">
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="form-control col-1"
+                  placeholder="Enter your delivery address"
+                  value={address}
+                  onChange={handleAddressChange}
+                />
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <label
+                className="label checkout-label fs-5"
+                htmlFor="serviceRating"
+              >
+                Rate Our Service:
+              </label>
               <div className="star-container">{renderStars(true)}</div>
             </div>
 
-            
-
             <div className="mt-3">
               <button
-                className="btn bg-success mt-3"
+                className="btn btn-outline-warning mx-0 mt-2"
                 onClick={handleCheckOut}
-                disabled={!name}
+                disabled={!name || !address}
               >
                 Check Out
               </button>

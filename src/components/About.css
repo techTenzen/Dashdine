@@ -1,0 +1,25 @@
+/* About.css */
+.about-page {
+  background: linear-gradient(45deg, #1a1a1a, #333333); /* Dark background with a gradient */
+  color: #ffffff; /* White text color */
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Adjusted font family */
+}
+
+.container {
+  max-width: 800px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #ffcc00; /* Yellow text color for headings */
+  margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 15px; /* Adjusted margin for better spacing between paragraphs */
+}
+
+/* Add more styles as needed */

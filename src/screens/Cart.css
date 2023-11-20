@@ -1,5 +1,55 @@
 /* Cart.css */
 
+body {
+  background: linear-gradient(45deg, #1c1c1c, #0d0d0d);
+  height: 100vh;
+  margin: 0;
+}
+
+.text-success.fs-4,
+.fs-2,
+.label,
+.star-container,
+.btn.bg-success {
+  color: #ff6f61; /* Coral color */
+}
+
+/* Customize color for Signature and Address */
+.label.signature-label {
+  color: #4caf50; /* Green color for Signature text */
+}
+
+.label.address-label {
+  color: #2196f3; /* Blue color for Address text */
+}
+
+.table-hover td {
+  color: #fff !important; /* White color */
+}
+.table-hover th,
+.table-hover td {
+  background-color: #121212; /* Dark charcoal color */
+}
+
+.table-hover th,
+.table-hover td,
+.star {
+  border-color: #2c2c2c; /* Slightly lighter charcoal color */
+}
+
+.table-hover th,
+.table-hover td,
+.btn {
+  color: #ffffff; /* White color */
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #1e1e1e; /* Darker charcoal color on hover or focus */
+  border-color: #ff6f61; /* Coral color */
+  color: #ffffff; /* White color on hover or focus */
+}
+
 .star-container {
   font-size: 24px;
 }
@@ -7,16 +57,32 @@
 .star {
   cursor: pointer;
   margin-right: 5px;
-  color: #ccc;
+  color: #4d4d4d; /* Slightly lighter charcoal color */
   transition: color 0.3s ease-in-out;
 }
 
 .star:hover,
 .star.selected {
-  color: #fdd835; /* Color when star is hovered or selected */
+  color: #ff6f61; /* Coral color on hover or selected */
 }
 
-/* Adjust the input field width as needed */
 .form-control.col-1 {
   width: 60px;
+}
+
+/* Cart.css */
+
+/* Add these styles to customize text color in the table header */
+.table-hover th {
+  color: #ff6f61 !important; /* Coral color */
+}
+
+/* Add these styles to customize text color in the table body */
+.table-hover td {
+  color: #5e5e5e; /* Charcoal color */
+}
+
+/* Add these styles to customize the background color of the table header */
+.table-hover thead {
+  background-color: #121212; /* Dark charcoal color */
 }

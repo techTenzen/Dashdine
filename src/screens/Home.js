@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
-import { CartProvider } from "../components/ContextReducer"; // Make sure this import is correct
+import { CartProvider } from "../components/ContextReducer"; 
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -49,15 +49,15 @@ export default function Home() {
                 <img
                   src="https://source.unsplash.com/random/900x700/?burger"
                   className="d-block w-100"
-                  style={{ filter: "brightness(50%)" }}
+                  style={{ height: "700px", filter: "brightness(50%)" }}
                   alt="..."
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://source.unsplash.com/random/900x700/?icecream"
+                  src="https://source.unsplash.com/random/600x700/?icecream"
                   className="d-block w-100"
-                  style={{ filter: "brightness(50%)" }}
+                  style={{ height: "700px", filter: "brightness(50%)" }}
                   alt="..."
                 />
               </div>
@@ -65,7 +65,7 @@ export default function Home() {
                 <img
                   src="https://source.unsplash.com/random/900x700/?candy"
                   className="d-block w-100"
-                  style={{ filter: "brightness(50%)" }}
+                  style={{ height: "700px", filter: "brightness(50%)" }}
                   alt="..."
                 />
               </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Select from "react-select";
 import Navbar from "../components/Navbar";
 
 export default function Signup() {
@@ -9,76 +10,53 @@ export default function Signup() {
     password: "",
     location: "",
   });
-  const [address, setAddress] = useState("");
 
-  const handlelocationClick = async () => {
-    try {
-      const position = await getCurrentPosition();
-      if (position) {
-        const { latitude, longitude } = position.coords;
-        const location = await fetchLocationFromCoordinates(
-          latitude,
-          longitude
-        );
-        setCredentials({ ...credentials, location: location });
-        setAddress(location);
-      }
-    } catch (error) {
-      console.error("Error fetching location:", error);
-    }
-  };
-
-  const getCurrentPosition = () => {
-    return new Promise((resolve, reject) => {
-      navigator.location.getCurrentPosition(resolve, reject);
-    });
-  };
-
-  const fetchLocationFromCoordinates = async (latitude, longitude) => {
-    try {
-      const response = await fetch(
-        "http://localhost:3001/api/getlocation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ latlong: { lat: latitude, long: longitude } }),
-        }
-      );
-
-      if (response.ok) {
-        const { location } = await response.json();
-        return location;
-      } else {
-        console.error("Error fetching location");
-        return "";
-      }
-    } catch (error) {
-      console.error("Error fetching location:", error);
-      return "";
-    }
-  };
+  // Static list of Indian cities
+    const cityOptions = [
+      { label: "Mumbai", value: "Mumbai" },
+      { label: "Delhi", value: "Delhi" },
+      { label: "Bangalore", value: "Bangalore" },
+      { label: "Kolkata", value: "Kolkata" },
+      { label: "Chennai", value: "Chennai" },
+      { label: "Hyderabad", value: "Hyderabad" },
+      { label: "Ahmedabad", value: "Ahmedabad" },
+      { label: "Pune", value: "Pune" },
+      { label: "Surat", value: "Surat" },
+      { label: "Jaipur", value: "Jaipur" },
+      { label: "Lucknow", value: "Lucknow" },
+      { label: "Kanpur", value: "Kanpur" },
+      { label: "Nagpur", value: "Nagpur" },
+      { label: "Indore", value: "Indore" },
+      { label: "Thane", value: "Thane" },
+      { label: "Bhopal", value: "Bhopal" },
+      { label: "Visakhapatnam", value: "Visakhapatnam" },
+      { label: "Pimpri-Chinchwad", value: "Pimpri-Chinchwad" },
+      { label: "Patna", value: "Patna" },
+      { label: "Vadodara", value: "Vadodara" },
+      // Add more cities as needed
+      { label: "Ludhiana", value: "Ludhiana" },
+      { label: "Agra", value: "Agra" },
+      { label: "Nashik", value: "Nashik" },
+      { label: "Faridabad", value: "Faridabad" },
+      { label: "Meerut", value: "Meerut" },
+    ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://localhost:3001/api/createuser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: credentials.name,
-            email: credentials.email,
-            password: credentials.password,
-            location: credentials.location,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:3001/api/createuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+          location: credentials.location,
+        }),
+      });
 
       const json = await response.json();
       console.log(json);
@@ -98,12 +76,14 @@ export default function Signup() {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
+  const handleLocationChange = (selectedOption) => {
+    setCredentials({ ...credentials, location: selectedOption.value });
+  };
+
   return (
     <div
       style={{
-        backgroundImage:
-          'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
-        backgroundSize: "cover",
+        background: "linear-gradient(45deg, #333, #000)",
         height: "100vh",
       }}
     >
@@ -115,6 +95,7 @@ export default function Signup() {
         <form
           className="w-50 m-auto mt-5 border bg-dark border-success rounded"
           onSubmit={handleSubmit}
+          style={{ color: "#FFF" }}
         >
           <div className="m-3">
             <label htmlFor="name" className="form-label">
@@ -143,30 +124,38 @@ export default function Signup() {
             />
           </div>
           <div className="m-3">
-            <label htmlFor="address" className="form-label">
-              Address
-            </label>
-            <fieldset>
-              <input
-                type="text"
-                className="form-control"
-                name="address"
-                placeholder='"Click below for fetching address"'
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                aria-describedby="emailHelp"
-              />
-            </fieldset>
-          </div>
-          <div className="m-3">
-            <button
-              type="button"
-              onClick={handlelocationClick}
-              name="location"
-              className="btn btn-success"
+            <label
+              htmlFor="city"
+              className="form-label"
+              style={{ color: "#FFF" }}
             >
-              Click for current Location
-            </button>
+              City
+            </label>
+            <Select
+              options={cityOptions}
+              onChange={handleLocationChange}
+              value={{
+                label: credentials.location,
+                value: credentials.location,
+              }}
+              placeholder="Select your city"
+              styles={{
+                control: (provided, state) => ({
+                  ...provided,
+                  backgroundColor: "#333",
+                  color: "#ccc",
+                }),
+                singleValue: (provided, state) => ({
+                  ...provided,
+                  color: "#ccc",
+                }),
+                option: (provided, state) => ({
+                  ...provided,
+                  backgroundColor: state.isSelected ? "#4CAF50" : "#333",
+                  color: "#FFF",
+                }),
+              }}
+            />
           </div>
           <div className="m-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
@@ -180,10 +169,18 @@ export default function Signup() {
               name="password"
             />
           </div>
-          <button type="submit" className="m-3 btn btn-success">
+          <button
+            type="submit"
+            className="m-3 btn btn-success"
+            style={{ background: "#4CAF50" }}
+          >
             Submit
           </button>
-          <Link to="/login" className="m-3 mx-1 btn btn-danger">
+          <Link
+            to="/login"
+            className="m-3 mx-1 btn btn-danger"
+            style={{ background: "#FF5050" }}
+          >
             Already a user
           </Link>
         </form>
