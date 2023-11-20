@@ -6,7 +6,8 @@ import "./Cart.css"; // Add your CSS file for styling (if needed)
 
 export default function Cart() {
   const [name, setName] = useState("");
-  const [selectedRating, setSelectedRating] = useState(0); // State for selected rating
+  const [selectedRating, setSelectedRating] = useState(0); // State for selected food rating
+  const [serviceRating, setServiceRating] = useState(0); // State for selected service rating
   const data = useCart();
   const dispatch = useDispatchCart();
 
@@ -25,6 +26,7 @@ export default function Cart() {
       body: JSON.stringify({
         order_data: data,
         email: userEmail,
+        serviceRating: serviceRating,
       }),
     });
 
@@ -34,8 +36,8 @@ export default function Cart() {
       // Show the Thank You toast
       showCheckoutSuccessToast();
 
-      // Show the Feedback toast with selected rating
-      showFeedbackToast(selectedRating);
+      // Show the Feedback toast with selected food and service ratings
+      showFeedbackToast(selectedRating, serviceRating);
 
       setTimeout(() => {
         window.location.reload();
@@ -55,9 +57,9 @@ export default function Cart() {
     });
   };
 
-  const showFeedbackToast = (rating) => {
+  const showFeedbackToast = (foodRating, serviceRating) => {
     toast.info(
-      `🌟 Thank you for your feedback! You gave us a ${rating}-star rating. 🌟`,
+      `🌟 Thank you for your feedback! You gave us a ${serviceRating}-star rating for service. 🌟`,
       {
         position: "top-center",
         autoClose: 3000,
@@ -74,18 +76,30 @@ export default function Cart() {
     setName(event.target.value);
   };
 
-  const handleStarClick = (rating) => {
-    setSelectedRating(rating);
+  const handleStarClick = (rating, isServiceRating) => {
+    if (isServiceRating) {
+      setServiceRating(rating);
+    } else {
+      setSelectedRating(rating);
+    }
   };
 
-  const renderStars = () => {
+  const renderStars = (isServiceRating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <span
           key={i}
-          className={`star ${selectedRating >= i ? "selected" : ""}`}
-          onClick={() => handleStarClick(i)}
+          className={`star ${
+            isServiceRating
+              ? serviceRating >= i
+                ? "selected"
+                : ""
+              : selectedRating >= i
+              ? "selected"
+              : ""
+          }`}
+          onClick={() => handleStarClick(i, isServiceRating)}
         >
           ★
         </span>
@@ -152,8 +166,11 @@ export default function Cart() {
             </div>
 
             <div className="mt-3">
-              <div className="star-container">{renderStars()}</div>
+              <label htmlFor="serviceRating">Rate Our Service:</label>
+              <div className="star-container">{renderStars(true)}</div>
             </div>
+
+            
 
             <div className="mt-3">
               <button
