@@ -1,0 +1,37 @@
+/* Navbar.css */
+
+/* Customize the brand font and size */
+.navbar-brand {
+  font-size: 2rem;
+}
+
+/* Style the active link in the navbar */
+.nav-link.active {
+  color: #ffffff; /* Change the active link text color */
+}
+
+/* Style the buttons in the navbar */
+.btn {
+  margin-right: 8px;
+}
+
+/* Style the Cart button with Badge */
+.btn-cart {
+  position: relative;
+}
+
+/* Style the Badge in the Cart button */
+.MuiBadge-dot {
+  background-color: #ff4081; /* Change the badge color */
+  height: 14px;
+  width: 14px;
+}
+
+/* Style the Logout button */
+.btn-logout {
+  background-color: #ffffff; /* Change the button background color */
+  color: #28a745; /* Change the button text color */
+  border: 1px solid #28a745; /* Change the button border color */
+}
+
+/* Add additional styles as needed */

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Badge from "@material-ui/core/Badge";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Modal from "../Modal";
 import Cart from "../screens/Cart";
 import { useCart /*useDispatchCart*/ } from "../components/ContextReducer";
+import "./Navbar.css"; // Import your CSS file for additional styling
 
 export default function Navbar() {
   const [cartView, setCartView] = useState(false);
   const navigate = useNavigate();
-  const items = useCart(); // Get the cart items
+  const items = useCart();
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -22,16 +23,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav
-        className="navbar navbar-expand-lg navbar-dark bg-success position-sticky"
-        style={{
-          boxShadow: "0px 10px 20px black",
-          filter: "blur(20)",
-          position: "fixed",
-          zIndex: "10",
-          width: "100%",
-        }}
-      >
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success position-sticky">
         <div className="container-fluid">
           <Link className="navbar-brand fs-1 fst-italic" to="/">
             DashDine
@@ -80,20 +72,19 @@ export default function Navbar() {
                 </Link>
               </form>
             ) : (
-              <div>
+              <div className="d-flex align-items-center">
                 <div
-                  className="btn bg-white text-success mx-2"
+                  className="btn bg-white text-success mx-2 position-relative"
                   onClick={loadCart}
                 >
                   <Badge
                     color="secondary"
-                    //badgeContent={updateCartItemCount()}
-                    overlap="rectangular"
+                    badgeContent={items.length}
+                    overlap="circular"
                   >
-                    {items.length}
                     <ShoppingCartIcon />
                   </Badge>
-                  Cart
+                  <span className="ms-1">Cart</span>
                 </div>
                 {cartView ? (
                   <Modal onClose={() => setCartView(false)}>
@@ -104,7 +95,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="btn bg-white text-success"
+                  className="btn bg-white text-success ms-2"
                 >
                   Logout
                 </button>
