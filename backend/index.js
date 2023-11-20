@@ -9,10 +9,7 @@ app.get("/", (req, res) => {
 });
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://backend2-buvg.onrender.com"
-  ); // Update the origin
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Update the origin
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

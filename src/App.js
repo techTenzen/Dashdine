@@ -6,10 +6,8 @@ import { CartProvider } from "./components/ContextReducer";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
-import Cart from "./screens/Cart";
-import MyOrder from "./screens/MyOrder";
+
 import Contact from "./screens/Contact";
-import config from "./config";
 
 function App() {
   return (
@@ -20,22 +18,22 @@ function App() {
             <Route
               exact
               path="/"
-              element={<Home backendUrl={config.backendUrl} />}
+              element={<Home />}
             />
             <Route
               exact
               path="/login"
-              element={<Login backendUrl={config.backendUrl} />}
+              element={<Login  />}
             />
             <Route
               exact
               path="/createuser"
-              element={<Signup backendUrl={config.backendUrl} />}
+              element={<Signup  />}
             />
             <Route
               exact
               path="/contact"
-              element={<Contact backendUrl={config.backendUrl} />}
+              element={<Contact  />}
             />
           </Routes>
           <ToastContainer />
