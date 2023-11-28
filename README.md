@@ -35,7 +35,7 @@ While you're eager to indulge in DashDine, please note that the deployment is cu
 DashDine thrives on community contributions! If you have ideas, suggestions, or bug reports, feel free to contribute. 
 
 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the MIT LICENSE file for details.
 
 © [2023] [scattershott]
 
