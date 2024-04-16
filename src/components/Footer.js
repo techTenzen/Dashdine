@@ -7,7 +7,7 @@ export default function Footer() {
       <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div className="col-md-5">
           <p className="mb-md-0 text-muted">
-            Welcome to DashDines - Your Culinary Journey Begins Here!
+            Welcome to 24/7 Marts - Your Culinary Journey Begins Here!
           </p>
         </div>
         <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">

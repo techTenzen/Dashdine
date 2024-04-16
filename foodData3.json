@@ -1,0 +1,266 @@
+[
+  {
+    "CategoryName": "Grains",
+    "name": "Basmati Rice",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "10 per kg"
+      }
+    ],
+    "description": "High-quality Basmati rice perfect for various rice dishes."
+  },
+  {
+    "CategoryName": "Grains",
+    "name": "Brown Rice",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "8 per kg"
+      }
+    ],
+    "description": "Healthy alternative to white rice, rich in fiber and nutrients."
+  },
+  {
+    "CategoryName": "Grains",
+    "name": "Quinoa",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "15 per kg"
+      }
+    ],
+    "description": "Nutrient-rich whole grain, great for salads, soups, and as a side dish."
+  },
+  {
+    "CategoryName": "Grains",
+    "name": "Barley",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "12 per kg"
+      }
+    ],
+    "description": "Versatile grain used in soups, stews, salads, and as a rice alternative."
+  },
+  {
+    "CategoryName": "Vegetables",
+    "name": "Tomatoes",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "6 per kg"
+      }
+    ],
+    "description": "Fresh and juicy tomatoes, perfect for salads, sauces, and cooking."
+  },
+  {
+    "CategoryName": "Vegetables",
+    "name": "Potatoes",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "5 per kg"
+      }
+    ],
+    "description": "Versatile vegetable, great for frying, roasting, boiling, or mashing."
+  },
+  {
+    "CategoryName": "Vegetables",
+    "name": "Onions",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "4 per kg"
+      }
+    ],
+    "description": "Essential ingredient in many dishes, adds flavor and aroma to meals."
+  },
+  {
+    "CategoryName": "Vegetables",
+    "name": "Spinach",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "8 per kg"
+      }
+    ],
+    "description": "Nutrient-rich leafy green, perfect for salads, soups, and sautéing."
+  },
+  {
+    "CategoryName": "Fruits",
+    "name": "Apples",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "12 per kg"
+      }
+    ],
+    "description": "Sweet and crunchy apples, a healthy snack option."
+  },
+  {
+    "CategoryName": "Fruits",
+    "name": "Bananas",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "8 per kg"
+      }
+    ],
+    "description": "Naturally sweet and nutritious fruit, perfect for snacking or adding to smoothies."
+  },
+  {
+    "CategoryName": "Fruits",
+    "name": "Oranges",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "10 per kg"
+      }
+    ],
+    "description": "Juicy and refreshing oranges, rich in vitamin C."
+  },
+  {
+    "CategoryName": "Fruits",
+    "name": "Grapes",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "15 per kg"
+      }
+    ],
+    "description": "Sweet and flavorful grapes, great for snacking or adding to fruit salads."
+  },
+  {
+    "CategoryName": "Dairy",
+    "name": "Milk",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "3 per liter"
+      }
+    ],
+    "description": "Fresh cow's milk, essential for various recipes and beverages."
+  },
+  {
+    "CategoryName": "Dairy",
+    "name": "Cheese",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "20 per 200g"
+      }
+    ],
+    "description": "Versatile dairy product, perfect for sandwiches, salads, and cooking."
+  },
+  {
+    "CategoryName": "Dairy",
+    "name": "Yogurt",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "5 per 500g"
+      }
+    ],
+    "description": "Creamy and delicious yogurt, great for breakfast or as a snack."
+  },
+  {
+    "CategoryName": "Dairy",
+    "name": "Butter",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "10 per 200g"
+      }
+    ],
+    "description": "Rich and creamy butter, perfect for cooking, baking, or spreading on bread."
+  },
+  {
+    "CategoryName": "Meat",
+    "name": "Chicken Breast",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "25 per kg"
+      }
+    ],
+    "description": "Lean and protein-rich meat, great for grilling, baking, or stir-frying."
+  },
+  {
+    "CategoryName": "Meat",
+    "name": "Ground Beef",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "30 per kg"
+      }
+    ],
+    "description": "Versatile meat option, perfect for burgers, meatballs, or tacos."
+  },
+  {
+    "CategoryName": "Meat",
+    "name": "Salmon Fillet",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "40 per kg"
+      }
+    ],
+    "description": "Healthy and flavorful fish, great for grilling, baking, or pan-searing."
+  },
+  {
+    "CategoryName": "Meat",
+    "name": "Pork Chops",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "35 per kg"
+      }
+    ],
+    "description": "Tender and juicy pork chops, perfect for grilling or baking."
+  },
+  {
+    "CategoryName": "Bakery",
+    "name": "White Bread",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "5 per loaf"
+      }
+    ],
+    "description": "Soft and fluffy bread, great for sandwiches or toasting."
+  },
+  {
+    "CategoryName": "Bakery",
+    "name": "Whole Wheat Bread",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "6 per loaf"
+      }
+    ],
+    "description": "Nutritious bread option, rich in fiber and whole grains."
+  },
+  {
+    "CategoryName": "Bakery",
+    "name": "Croissants",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "2 each"
+      }
+    ],
+    "description": "Buttery and flaky pastry, perfect for breakfast or as a snack."
+  },
+  {
+    "CategoryName": "Bakery",
+    "name": "Bagels",
+    "img": "https://via.placeholder.com/500",
+    "options": [
+      {
+        "price": "3 for a pack of 4"
+      }
+    ],
+    "description": "Chewy and flavorful bread, great for sandwiches or with cream cheese."
+  }
+]

@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark position-sticky">
       <div className="container-fluid">
         <Link className="navbar-brand fs-1 text-warning" to="/">
-          DashDine
+          24/7 Mart
         </Link>
         <button
           className="navbar-toggler"

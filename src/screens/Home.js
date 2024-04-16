@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
-import { CartProvider } from "../components/ContextReducer"; 
+import { CartProvider } from "../components/ContextReducer";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -47,7 +47,7 @@ export default function Home() {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="https://source.unsplash.com/random/900x700/?burger"
+                  src="https://source.unsplash.com/random/900x700/?bakery"
                   className="d-block w-100"
                   style={{ height: "700px", filter: "brightness(50%)" }}
                   alt="..."
@@ -63,7 +63,15 @@ export default function Home() {
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://source.unsplash.com/random/900x700/?candy"
+                  src="https://source.unsplash.com/random/900x700/?snacks"
+                  className="d-block w-100"
+                  style={{ height: "700px", filter: "brightness(50%)" }}
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://source.unsplash.com/random/900x700/?household"
                   className="d-block w-100"
                   style={{ height: "700px", filter: "brightness(50%)" }}
                   alt="..."

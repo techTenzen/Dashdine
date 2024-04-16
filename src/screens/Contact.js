@@ -20,7 +20,8 @@ const ContactUsPage = () => {
     borderRadius: "10px",
     padding: "20px",
     marginBottom: "20px",
-    color: "red"  };
+    color: "red",
+  };
 
   const formStyle = {
     backgroundColor: "#black",
@@ -94,7 +95,7 @@ const ContactUsPage = () => {
     {
       question: "How can I contact customer support?",
       answer:
-        "You can contact our customer support team via email at support@dashdine.com or by phone at +1 (555) 123-4567.",
+        "You can contact our customer support team via email at support@24/7 Mart.com or by phone at +1 (555) 123-4567.",
     },
     {
       question: "Is my payment information secure?",
@@ -181,7 +182,7 @@ const ContactUsPage = () => {
                   border: "none",
                   cursor: "pointer",
                   fontWeight: "bold",
-                  color: "black"
+                  color: "black",
                 }}
                 onClick={() => toggleAnswer(index)}
               >

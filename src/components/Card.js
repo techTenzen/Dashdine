@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";
 
 const containerStyle = {
-  paddingLeft: 0, 
-  paddingRight: 0, 
+  paddingLeft: 0,
+  paddingRight: 0,
   marginLeft: 0,
-  marginRight: 0, 
+  marginRight: 0,
 };
 const cardStyle = {
   maxWidth: "22rem",
-  maxHeight: "520px",
+  height: "auto", // Set a fixed height or adjust as needed
+  display: "inline-block", // Ensure cards are displayed in a row
 };
 
 const selectStyle = {
@@ -87,7 +88,7 @@ export default function Card({ foodItems }) {
   return (
     <div>
       {foodItems.map((dish, index) => (
-        <div className="card mt-3" style={ containerStyle} key={index}>
+        <div className="card mt-3" style={containerStyle} key={index}>
           <img
             src={dish.img}
             className="card-img-top"
@@ -133,10 +134,7 @@ export default function Card({ foodItems }) {
               </div>
             </div>
             <hr />
-            <button
-              className="btn btn-dark  ms-2"
-              onClick={handleAddToCart}
-            >
+            <button className="btn btn-dark  ms-2" onClick={handleAddToCart}>
               Add To Cart
             </button>
           </div>
