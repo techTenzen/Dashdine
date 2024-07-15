@@ -2,7 +2,7 @@
 
 Welcome to DashDine, where culinary delights meet doorstep convenience! DashDine is your go-to food delivery app, designed to elevate your dining experience with a diverse range of cuisines and seamless features.
 
-## Features 🌟
+### Features 🌟
 
 ### User Authentication 🔒
 
