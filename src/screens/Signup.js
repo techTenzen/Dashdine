@@ -12,51 +12,54 @@ export default function Signup() {
   });
 
   // Static list of Indian cities
-    const cityOptions = [
-      { label: "Mumbai", value: "Mumbai" },
-      { label: "Delhi", value: "Delhi" },
-      { label: "Bangalore", value: "Bangalore" },
-      { label: "Kolkata", value: "Kolkata" },
-      { label: "Chennai", value: "Chennai" },
-      { label: "Hyderabad", value: "Hyderabad" },
-      { label: "Ahmedabad", value: "Ahmedabad" },
-      { label: "Pune", value: "Pune" },
-      { label: "Surat", value: "Surat" },
-      { label: "Jaipur", value: "Jaipur" },
-      { label: "Lucknow", value: "Lucknow" },
-      { label: "Kanpur", value: "Kanpur" },
-      { label: "Nagpur", value: "Nagpur" },
-      { label: "Indore", value: "Indore" },
-      { label: "Thane", value: "Thane" },
-      { label: "Bhopal", value: "Bhopal" },
-      { label: "Visakhapatnam", value: "Visakhapatnam" },
-      { label: "Pimpri-Chinchwad", value: "Pimpri-Chinchwad" },
-      { label: "Patna", value: "Patna" },
-      { label: "Vadodara", value: "Vadodara" },
-      // Add more cities as needed
-      { label: "Ludhiana", value: "Ludhiana" },
-      { label: "Agra", value: "Agra" },
-      { label: "Nashik", value: "Nashik" },
-      { label: "Faridabad", value: "Faridabad" },
-      { label: "Meerut", value: "Meerut" },
-    ];
+  const cityOptions = [
+    { label: "Mumbai", value: "Mumbai" },
+    { label: "Delhi", value: "Delhi" },
+    { label: "Bangalore", value: "Bangalore" },
+    { label: "Kolkata", value: "Kolkata" },
+    { label: "Chennai", value: "Chennai" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Ahmedabad", value: "Ahmedabad" },
+    { label: "Pune", value: "Pune" },
+    { label: "Surat", value: "Surat" },
+    { label: "Jaipur", value: "Jaipur" },
+    { label: "Lucknow", value: "Lucknow" },
+    { label: "Kanpur", value: "Kanpur" },
+    { label: "Nagpur", value: "Nagpur" },
+    { label: "Indore", value: "Indore" },
+    { label: "Thane", value: "Thane" },
+    { label: "Bhopal", value: "Bhopal" },
+    { label: "Visakhapatnam", value: "Visakhapatnam" },
+    { label: "Pimpri-Chinchwad", value: "Pimpri-Chinchwad" },
+    { label: "Patna", value: "Patna" },
+    { label: "Vadodara", value: "Vadodara" },
+    // Add more cities as needed
+    { label: "Ludhiana", value: "Ludhiana" },
+    { label: "Agra", value: "Agra" },
+    { label: "Nashik", value: "Nashik" },
+    { label: "Faridabad", value: "Faridabad" },
+    { label: "Meerut", value: "Meerut" },
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/api/createuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: credentials.name,
-          email: credentials.email,
-          password: credentials.password,
-          location: credentials.location,
-        }),
-      });
+      const response = await fetch(
+        "https://dashdine-fy97.onrender.com/api/createuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: credentials.name,
+            email: credentials.email,
+            password: credentials.password,
+            location: credentials.location,
+          }),
+        }
+      );
 
       const json = await response.json();
       console.log(json);

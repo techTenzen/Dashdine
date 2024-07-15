@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useCart, useDispatchCart } from "../components/ContextReducer";
 import { toast } from "react-toastify";
-import "./Cart.css"; 
+import "./Cart.css";
 
 export default function Cart() {
   const [name, setName] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
   const [serviceRating, setServiceRating] = useState(0);
-  const [address, setAddress] = useState(""); 
+  const [address, setAddress] = useState("");
   const data = useCart();
   const dispatch = useDispatchCart();
 
@@ -19,18 +19,21 @@ export default function Cart() {
     }
 
     let userEmail = localStorage.getItem("userEmail");
-    let response = await fetch("http://localhost:3001/api/orderData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        order_data: data,
-        email: userEmail,
-        serviceRating: serviceRating,
-        address: address,
-      }),
-    });
+    let response = await fetch(
+      "https://dashdine-fy97.onrender.com/api/orderData",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          order_data: data,
+          email: userEmail,
+          serviceRating: serviceRating,
+          address: address,
+        }),
+      }
+    );
 
     if (response.status === 200) {
       dispatch({ type: "CLEAR_CART" });
